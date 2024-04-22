@@ -2,39 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:gtg/pages/verified.dart';
 
 class Item_page extends StatefulWidget {
-  const Item_page({super.key});
+  const Item_page({Key? key}) : super(key: key);
 
   @override
   State<Item_page> createState() => _MyWidgetState();
 }
 
-int _selectedIndex = 0;
-
 class _MyWidgetState extends State<Item_page> {
+  int _selectedIndex = 0;
+  int _carouselIndex = 0;
+  late PageController _pageController =
+      PageController(viewportFraction: 0.8, initialPage: 0);
+  List<String> images = [
+    "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
+    "https://wallpaperaccess.com/full/2637581.jpg",
+    "https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg"
+  ];
+
   @override
   Widget build(BuildContext context) {
-    const List<Widget> _pages = <Widget>[
-      Icon(
-        Icons.home,
-        size: 150,
-      ),
-      Icon(
-        Icons.search,
-        size: 150,
-      ),
-      Icon(
-        Icons.pin_drop,
-        size: 150,
-      ),
-      Icon(
-        Icons.feed,
-        size: 150,
-      ),
-      Icon(
-        Icons.account_circle,
-        size: 150,
-      ),
-    ];
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -56,9 +42,9 @@ class _MyWidgetState extends State<Item_page> {
             'assets/gtg1.png',
             width: 54,
             height: 54,
-          ), //IconButton
+          ),
         ],
-        backgroundColor: Colors.white, //<Widget>[]
+        backgroundColor: Colors.white,
         elevation: 50.0,
         leading: IconButton(
           icon: const Icon(Icons.menu),
@@ -66,8 +52,16 @@ class _MyWidgetState extends State<Item_page> {
           onPressed: () {},
         ),
       ),
-      body: Center(
-        child: _pages.elementAt(_selectedIndex), //New
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [
+          _buildImageCarousel(),
+          // Add other widgets for different pages
+          Icon(Icons.search, size: 150),
+          Icon(Icons.pin_drop, size: 150),
+          Icon(Icons.feed, size: 150),
+          Icon(Icons.account_circle, size: 150),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
@@ -102,8 +96,29 @@ class _MyWidgetState extends State<Item_page> {
             label: 'account',
           )
         ],
-        currentIndex: _selectedIndex, //New
+        currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+      ),
+    );
+  }
+
+  Widget _buildImageCarousel() {
+    return Container(
+      height: 300, // Adjust height as needed
+      child: PageView.builder(
+        itemCount: images.length,
+        controller: _pageController,
+        onPageChanged: (page) {
+          setState(() {
+            _carouselIndex = page;
+          });
+        },
+        itemBuilder: (context, pagePosition) {
+          return Container(
+            margin: EdgeInsets.all(10),
+            child: Image.network(images[pagePosition]),
+          );
+        },
       ),
     );
   }
@@ -114,3 +129,4 @@ class _MyWidgetState extends State<Item_page> {
     });
   }
 }
+ 
