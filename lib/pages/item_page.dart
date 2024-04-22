@@ -107,9 +107,9 @@ class _MyWidgetState extends State<Item_page> {
     ];
     return SingleChildScrollView(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ignore: sized_box_for_whitespace
+          // Image Carousel
           Container(
             height: height * 0.3,
             child: PageView.builder(
@@ -132,32 +132,28 @@ class _MyWidgetState extends State<Item_page> {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
+          // Star Rating
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                    right: 15), // Add padding to the right
+                padding: const EdgeInsets.only(right: 15),
                 child: Container(
                   height: 32,
                   width: 70,
                   decoration: BoxDecoration(
                     color: Colors.green,
-                    borderRadius:
-                        BorderRadius.circular(3), // Adjust the radius as needed
+                    borderRadius: BorderRadius.circular(3),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Add space between text and image
-
                       Image.asset('assets/star.png', width: 20, height: 20),
                       const SizedBox(width: 8),
                       const Text(
                         '4.4',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
-                      // Adjust the image path and size
                     ],
                   ),
                 ),
@@ -165,6 +161,7 @@ class _MyWidgetState extends State<Item_page> {
             ],
           ),
           const SizedBox(height: 10),
+          // About Section
           const Padding(
             padding: EdgeInsets.only(left: 10),
             child: Text(
@@ -189,6 +186,7 @@ class _MyWidgetState extends State<Item_page> {
             ),
           ),
           const SizedBox(height: 10),
+          // Venue Info Section
           const Padding(
             padding: EdgeInsets.only(left: 10),
             child: Text(
@@ -201,24 +199,58 @@ class _MyWidgetState extends State<Item_page> {
               ),
             ),
           ),
+          // Add your Venue Info list here
+          VenueInfoList(), // <- Add your Venue Info List here
+          const SizedBox(height: 10),
+          const Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Text(
+              'Location',
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
+              ),
+            ),
+          ),
+          // Add more widgets below as needed
           Container(
             height: 200,
             color: Colors.blue,
             child: const Center(
               child: Text(
-                'Another Widget',
+                'Location',
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
             ),
           ),
-          const SizedBox(height: 20),
-          Container(
-            height: 200,
-            color: Colors.blue,
-            child: const Center(
-              child: Text(
-                'Another Widget',
-                style: TextStyle(color: Colors.white, fontSize: 24),
+          const SizedBox(height: 10),
+          Center(
+            child: SizedBox(
+              height: 60,
+              width: 363,
+              child: TextButton(
+                child: const Text('Add to the route',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                    )),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromARGB(255, 206, 49, 49)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Item_page()),
+                  );
+                },
               ),
             ),
           ),
@@ -231,5 +263,57 @@ class _MyWidgetState extends State<Item_page> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+}
+
+class VenueInfoList extends StatelessWidget {
+  final List<Map<String, dynamic>> venueInfo = [
+    {'label': 'Payment', 'value': 'Cash, Credit Card', 'icon': Icons.payment},
+    {'label': 'Booking Policy', 'value': 'Online, Phone', 'icon': Icons.book},
+    {
+      'label': 'Cancellation Policy',
+      'value': '48 hours prior notice',
+      'icon': Icons.cancel
+    },
+    {'label': 'Air Conditioning', 'value': 'Yes', 'icon': Icons.ac_unit},
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Wrap(
+          spacing: 8.0, // Adjust the spacing between items as needed
+          runSpacing: 8.0, // Adjust the spacing between rows as needed
+          children: venueInfo.map((info) {
+            return SizedBox(
+              width: MediaQuery.of(context).size.width / 2 -
+                  16.0, // Adjust the width of each item as needed
+              child: Container(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(info['icon']),
+                    SizedBox(width: 8.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          info['label'],
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 4.0),
+                        Text(info['value']),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
   }
 }
