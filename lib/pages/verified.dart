@@ -1,5 +1,7 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 
 import 'item_page.dart';
 
@@ -18,7 +20,7 @@ class Verified extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Padding(
@@ -44,8 +46,8 @@ class Verified extends StatelessWidget {
                       height: 180,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -58,8 +60,8 @@ class Verified extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -74,21 +76,21 @@ class Verified extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20.0,
                   ),
                   SizedBox(
                     height: 60,
                     width: 363,
                     child: TextButton(
-                      child: Text('Continue',
+                      child: const Text('Continue',
                           style: TextStyle(
                             fontSize: 20.0,
                             color: Colors.white,
                           )),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
-                              Color.fromARGB(255, 206, 49, 49)),
+                              const Color.fromARGB(255, 206, 49, 49)),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
