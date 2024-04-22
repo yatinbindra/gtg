@@ -10,14 +10,6 @@ class Item_page extends StatefulWidget {
 
 class _MyWidgetState extends State<Item_page> {
   int _selectedIndex = 0;
-  int _carouselIndex = 0;
-  late PageController _pageController =
-      PageController(viewportFraction: 0.8, initialPage: 0);
-  List<String> images = [
-    "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
-    "https://wallpaperaccess.com/full/2637581.jpg",
-    "https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg"
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -103,22 +95,74 @@ class _MyWidgetState extends State<Item_page> {
   }
 
   Widget _buildImageCarousel() {
-    return Container(
-      height: 300, // Adjust height as needed
-      child: PageView.builder(
-        itemCount: images.length,
-        controller: _pageController,
-        onPageChanged: (page) {
-          setState(() {
-            _carouselIndex = page;
-          });
-        },
-        itemBuilder: (context, pagePosition) {
-          return Container(
-            margin: EdgeInsets.all(10),
-            child: Image.network(images[pagePosition]),
-          );
-        },
+    double height = MediaQuery.of(context).size.height;
+    PageController _pageController =
+        PageController(viewportFraction: 1, initialPage: 0);
+    List<String> images = [
+      "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
+      "https://wallpaperaccess.com/full/2637581.jpg",
+      "https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg"
+    ];
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            height: height * 0.3,
+            child: PageView.builder(
+              itemCount: images.length,
+              controller: _pageController,
+              onPageChanged: (page) {
+                setState(() {});
+              },
+              itemBuilder: (context, pagePosition) {
+                return Container(
+                  margin: EdgeInsets.all(10),
+                  child: Image.network(images[pagePosition]),
+                );
+              },
+            ),
+          ),
+          SizedBox(height: 20),
+          Text(
+            'Radisson Blu Kaushambi',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 20),
+          Container(
+            height: 200,
+            color: Colors.blue,
+            child: Center(
+              child: Text(
+                'Another Widget',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Container(
+            height: 200,
+            color: Colors.blue,
+            child: Center(
+              child: Text(
+                'Another Widget',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Container(
+            height: 200,
+            color: Colors.blue,
+            child: Center(
+              child: Text(
+                'Another Widget',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
