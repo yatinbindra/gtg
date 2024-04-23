@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:gtg/pages/verified.dart';
 
+import 'no_internet.dart';
+
 class Item_page extends StatefulWidget {
   const Item_page({Key? key}) : super(key: key);
 
@@ -50,8 +52,6 @@ class _MyWidgetState extends State<Item_page> {
         index: _selectedIndex,
         children: [
           _buildImageCarousel(),
-          // Add other widgets for different pages
-          const Icon(Icons.search, size: 150),
           const Icon(Icons.pin_drop, size: 150),
           const Icon(Icons.feed, size: 150),
           const Icon(Icons.account_circle, size: 150),
@@ -231,11 +231,6 @@ class _MyWidgetState extends State<Item_page> {
               height: 60,
               width: 363,
               child: TextButton(
-                child: const Text('Add to the route',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.white,
-                    )),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                       const Color.fromARGB(255, 206, 49, 49)),
@@ -248,9 +243,14 @@ class _MyWidgetState extends State<Item_page> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Item_page()),
+                    MaterialPageRoute(builder: (context) => const NoInternet()),
                   );
                 },
+                child: const Text('Add to the route',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                    )),
               ),
             ),
           ),
@@ -290,20 +290,20 @@ class VenueInfoList extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 2 -
                   16.0, // Adjust the width of each item as needed
               child: Container(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Icon(info['icon']),
-                    SizedBox(width: 8.0),
+                    const SizedBox(width: 8.0),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           info['label'],
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 4.0),
+                        const SizedBox(height: 4.0),
                         Text(info['value']),
                       ],
                     ),
