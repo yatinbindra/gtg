@@ -1,8 +1,6 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
-import 'package:gtg/pages/verified.dart';
-
 import 'no_internet.dart';
 import 'notification.dart';
 
@@ -68,9 +66,10 @@ class _MyWidgetState extends State<Item_page> {
     PageController _pageController =
         PageController(viewportFraction: 1, initialPage: 0);
     List<String> images = [
-      "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
-      "https://wallpaperaccess.com/full/2637581.jpg",
-      "https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg"
+      'assets/image1.png', // Asset image path
+      'assets/image2.png', // Asset image path
+      'assets/image.png', // Asset image path
+      'assets/image3.png', // Asset image path
     ];
     return SingleChildScrollView(
       child: Column(
@@ -88,7 +87,7 @@ class _MyWidgetState extends State<Item_page> {
               itemBuilder: (context, pagePosition) {
                 return Container(
                   margin: const EdgeInsets.all(10),
-                  child: Image.network(images[pagePosition]),
+                  child: Image.asset(images[pagePosition]),
                 );
               },
             ),
