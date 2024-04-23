@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         '/item': (context) => Item_page(),
         '/search': (context) => SearchPage(),
         '/location': (context) => LocationPage(),
-        '/notification': (context) => NotificationPage(),
+        '/notification': (context) => NotificationPage(color: Colors.pink),
         '/account': (context) => AccountPage(),
       },
     );
@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Item_page(),
     SearchPage(),
     LocationPage(),
-    NotificationPage(),
+    NotificationPage(color: Colors.pink),
     AccountPage(),
   ];
 
