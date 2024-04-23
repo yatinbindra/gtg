@@ -2,8 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-
-import 'item_page.dart';
+import 'no_internet.dart';
 
 class Verified extends StatelessWidget {
   const Verified({super.key});
@@ -39,12 +38,10 @@ class Verified extends StatelessWidget {
                   SizedBox(
                     height: height * 0.2,
                   ),
-                  Container(
-                    child: Image.asset(
-                      'assets/shield1.gif',
-                      width: 180,
-                      height: 180,
-                    ),
+                  Image.asset(
+                    'assets/shield1.gif',
+                    width: 180,
+                    height: 180,
                   ),
                   const Padding(
                     padding: EdgeInsets.all(8.0),
@@ -83,11 +80,6 @@ class Verified extends StatelessWidget {
                     height: 60,
                     width: 363,
                     child: TextButton(
-                      child: const Text('Continue',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white,
-                          )),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               const Color.fromARGB(255, 206, 49, 49)),
@@ -99,10 +91,14 @@ class Verified extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const Item_page()),
+                          MaterialPageRoute(builder: (context) => NoInternet()),
                         );
                       },
+                      child: const Text('Continue',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.white,
+                          )),
                     ),
                   )
                 ]))));

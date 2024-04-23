@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'item_page.dart';
+import 'home.dart';
 
 class NoInternet extends StatelessWidget {
   const NoInternet({super.key});
@@ -91,8 +91,7 @@ class NoInternet extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const Item_page()),
+                          MaterialPageRoute(builder: (context) => MyHomePage()),
                         );
                       },
                       child: const Text('Retry',

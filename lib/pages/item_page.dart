@@ -57,42 +57,7 @@ class _MyWidgetState extends State<Item_page> {
           const Icon(Icons.account_circle, size: 150),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        iconSize: 30,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        unselectedIconTheme: const IconThemeData(
-          color: Colors.black,
-        ),
-        selectedIconTheme: const IconThemeData(
-          color: Colors.red,
-        ),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pin_drop),
-            label: 'pinDrop',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.feed),
-            label: 'feed',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'account',
-          )
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
+      
     );
   }
 
