@@ -1,4 +1,8 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
+
+import 'home.dart';
 
 class NotificationPage extends StatelessWidget {
   final Color color;
@@ -21,7 +25,12 @@ class NotificationPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_outlined),
           tooltip: 'Back Icon',
-          onPressed: () {},
+          onPressed: () {
+             Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyHomePage()),
+                      );
+          },
         ),
         title: const Text(
           'Notification Centre',
@@ -33,6 +42,7 @@ class NotificationPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
+        // ignore: sized_box_for_whitespace
         child: Container(
           width: width,
           child: Column(

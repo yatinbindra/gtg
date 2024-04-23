@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 
-import 'allow_location.dart';
+import 'home.dart';
 
-class NoInternet extends StatelessWidget {
-  const NoInternet({super.key});
+class AllowLocation extends StatelessWidget {
+  const AllowLocation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +36,12 @@ class NoInternet extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: height * 0.2,
+                    height: height * 0.15,
                   ),
                   Image.asset(
-                    'assets/offline.png',
-                    width: 257,
-                    height: 193,
+                    'assets/location.png',
+                    width: 180,
+                    height: 180,
                   ),
                   const Padding(
                     padding: EdgeInsets.all(8.0),
@@ -49,10 +49,8 @@ class NoInternet extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Looks Like You Are Offline',
-                          style: TextStyle(
-                              fontSize: 25.0,
-                              color: Color.fromARGB(255, 206, 49, 49)),
+                          'Allow Location',
+                          style: TextStyle(fontSize: 25.0, color: Colors.black),
                         ),
                       ],
                     ),
@@ -63,11 +61,11 @@ class NoInternet extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'No internet connection found.',
+                          'We need your permission to',
                           style: TextStyle(fontSize: 15.0, color: Colors.black),
                         ),
                         Text(
-                          'Check your connection or try again.',
+                          'access your location.',
                           style: TextStyle(fontSize: 15.0, color: Colors.black),
                         ),
                       ],
@@ -91,16 +89,37 @@ class NoInternet extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => AllowLocation()),
+                          MaterialPageRoute(builder: (context) => MyHomePage()),
                         );
                       },
-                      child: const Text('Retry',
+                      child: const Text('Allow',
                           style: TextStyle(
                             fontSize: 20.0,
                             color: Colors.white,
                           )),
                     ),
-                  )
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyHomePage()),
+                      );
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        'Remind me later',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Color.fromARGB(255, 206, 49, 49),
+                        ),
+                      ),
+                    ),
+                  ),
                 ]))));
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'account.dart';
 import 'item_page.dart';
 import 'location.dart';
-import 'notification.dart';
+import 'news.dart';
 import 'search.dart';
 
 void main() {
@@ -20,11 +20,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => MyHomePage(),
-        '/item': (context) => Item_page(),
-        '/search': (context) => SearchPage(),
-        '/location': (context) => LocationPage(),
-        '/notification': (context) => NotificationPage(color: Colors.pink),
-        '/account': (context) => AccountPage(),
+        '/item': (context) => const Item_page(),
+        '/search': (context) => const SearchPage(),
+        '/location': (context) => const LocationPage(),
+        '/notification': (context) => const NewsPage(),
+        '/account': (context) => const AccountPage(),
       },
     );
   }
@@ -39,11 +39,11 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    Item_page(),
-    SearchPage(),
-    LocationPage(),
-    NotificationPage(color: Colors.pink),
-    AccountPage(),
+    const Item_page(),
+    const SearchPage(),
+    const LocationPage(),
+    const NewsPage(),
+    const AccountPage(),
   ];
 
   @override

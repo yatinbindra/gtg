@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gtg/pages/verified.dart';
 
 import 'no_internet.dart';
+import 'notification.dart';
 
 class Item_page extends StatefulWidget {
   const Item_page({Key? key}) : super(key: key);
@@ -24,7 +25,9 @@ class _MyWidgetState extends State<Item_page> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Verified()),
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const NotificationPage(color: Colors.red)),
               );
             },
             child: Image.asset(
@@ -57,7 +60,6 @@ class _MyWidgetState extends State<Item_page> {
           const Icon(Icons.account_circle, size: 150),
         ],
       ),
-      
     );
   }
 
