@@ -19,27 +19,43 @@ class NotificationPage extends StatelessWidget {
         ? 'assets/notification_pink.png'
         : 'assets/notification.png';
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 50.0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_outlined),
-          tooltip: 'Back Icon',
-          onPressed: () {
-             Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MyHomePage()),
-                      );
-          },
-        ),
-        title: const Text(
-          'Notification Centre',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new_outlined),
+              tooltip: 'Back Icon',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
+              },
+            ),
+            title: const Text(
+              'Notification Centre',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              ),
+            ),
+            centerTitle: true,
           ),
         ),
-        centerTitle: true,
       ),
       body: Center(
         // ignore: sized_box_for_whitespace

@@ -18,6 +18,20 @@ class _MyWidgetState extends State<Item_page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 255, 208, 208),
+                Color.fromARGB(255, 255, 255, 255)
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: [0, 0.7],
+              tileMode: TileMode.clamp,
+            ),
+          ),
+        ),
         actions: <Widget>[
           GestureDetector(
             onTap: () {
@@ -41,8 +55,8 @@ class _MyWidgetState extends State<Item_page> {
             height: 54,
           ),
         ],
-        backgroundColor: Colors.white,
-        elevation: 50.0,
+        backgroundColor: Colors.transparent, // Set transparent background
+        elevation: 0.0, // No shadow
         leading: IconButton(
           icon: const Icon(Icons.menu),
           tooltip: 'Menu Icon',
