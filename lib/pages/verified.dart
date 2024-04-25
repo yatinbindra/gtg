@@ -15,6 +15,7 @@ class Verified extends StatelessWidget {
         body: Container(
             height: height,
             width: width,
+            color: Colors.white,
             child: SingleChildScrollView(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

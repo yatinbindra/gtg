@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'account.dart';
 import 'location.dart';
 import 'news.dart';
@@ -45,6 +46,28 @@ class _MyHomePageState extends State<MyHomePage> {
     const AccountPage(),
   ];
 
+  late bool isSwitched; // Initialize switch state
+  bool isPushEnabled = false;
+  final String _pushEnabledKey = 'push_enabled';
+  @override
+  void initState() {
+    super.initState();
+    _loadSwitchState(); // Load switch state when widget initializes
+  }
+
+  Future<void> _loadSwitchState() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      // Retrieve switch state, default to false if not found
+      isSwitched = prefs.getBool('switchState') ?? false;
+      isPushEnabled = prefs.getBool(_pushEnabledKey) ?? true;
+    });
+  }
+
+  Color Finalcolor() {
+    return isPushEnabled ? Colors.pink : Colors.red;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.red.withOpacity(0.5),
+              color: Finalcolor().withOpacity(0.5),
               spreadRadius: 0.5,
               blurRadius: 6,
               offset: const Offset(0, -1),
@@ -77,8 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
             unselectedIconTheme: const IconThemeData(
               color: Colors.black,
             ),
-            selectedIconTheme: const IconThemeData(
-              color: Colors.red,
+            selectedIconTheme: IconThemeData(
+              color: Finalcolor(),
             ),
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
@@ -115,9 +138,60 @@ class _MyHomePageState extends State<MyHomePage> {
       _selectedIndex = index;
     });
   }
+
+  bool getSwitchState() {
+    return isSwitched;
+  }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late bool isSwitched = false;
+  bool isPushEnabled = false; // Initialize switch state
+  final String _pushEnabledKey = 'push_enabled';
+  late Color textColor;
+  @override
+  void initState() {
+    super.initState();
+    _loadSwitchState();
+    textColor = isPushEnabled
+        ? Colors.red
+        : Colors.pink; // Load switch state when widget initializes
+  }
+
+  Color Finalcolor() {
+    return isPushEnabled ? Colors.pink : Colors.red;
+  }
+
+  void navigateToNotificationPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NotificationPage(color: Finalcolor()),
+      ),
+    );
+  }
+
+  // Function to load switch state from SharedPreferences
+  Future<void> _loadSwitchState() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      // Retrieve switch state, default to false if not found
+      isSwitched = prefs.getBool('switchState') ?? false;
+      isPushEnabled = prefs.getBool(_pushEnabledKey) ?? true;
+    });
+  }
+
+  // Function to save switch state to SharedPreferences
+  Future<void> _saveSwitchState() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool(_pushEnabledKey, isPushEnabled);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,13 +213,7 @@ class HomePage extends StatelessWidget {
         actions: <Widget>[
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const NotificationPage(color: Colors.red),
-                ),
-              );
+              navigateToNotificationPage(context);
             },
             child: Image.asset(
               'assets/bell.png',
@@ -155,14 +223,23 @@ class HomePage extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Switch(
-            value: false, // Provide default value for the switch
+            value: isPushEnabled, // Initialize switch value
             onChanged: (value) {
-              // Handle switch change
+              setState(() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
+                isPushEnabled = value;
+                _saveSwitchState(); // Save switch state when changed
+              });
             },
+            activeTrackColor: Colors.red,
+            activeColor: Colors.red,
           ),
         ],
-        backgroundColor: Colors.transparent, // Set transparent background
-        elevation: 0.0, // No shadow
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
         leading: IconButton(
           icon: const Icon(Icons.menu),
           tooltip: 'Menu Icon',
@@ -172,7 +249,11 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Text(
           'Welcome to the Home Page!',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Finalcolor(),
+          ),
         ),
       ),
     );

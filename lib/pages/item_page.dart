@@ -64,6 +64,7 @@ class _MyWidgetState extends State<Item_page> {
         ),
       ),
       body: IndexedStack(
+        
         index: _selectedIndex,
         children: [
           _buildImageCarousel(),
@@ -87,6 +88,7 @@ class _MyWidgetState extends State<Item_page> {
     ];
     return SingleChildScrollView(
       child: Column(
+        
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Image Carousel
