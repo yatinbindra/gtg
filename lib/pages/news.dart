@@ -28,7 +28,12 @@ class NewsPage extends StatelessWidget {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new_outlined),
               tooltip: 'Back Icon',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
+              },
             ),
             title: const Text(
               'News & Update',

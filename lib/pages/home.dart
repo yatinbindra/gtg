@@ -303,6 +303,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     double width = MediaQuery.of(context).size.width;
     String imagePath = Finalcolor() == Colors.pink
         ? 'assets/homePage2.png'
