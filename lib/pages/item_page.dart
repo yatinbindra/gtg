@@ -1,6 +1,7 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'home.dart';
 import 'no_internet.dart';
 import 'notification.dart';
 
@@ -13,6 +14,25 @@ class Item_page extends StatefulWidget {
 
 class _MyWidgetState extends State<Item_page> {
   int _selectedIndex = 0;
+  bool isPushEnabled = false;
+  final String _pushEnabledKey = 'push_enabled';
+  @override
+  void initState() {
+    super.initState();
+    _loadSwitchState(); // Load switch state when widget initializes
+  }
+
+  Future<void> _loadSwitchState() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      // Retrieve switch state, default to false if not found
+      isPushEnabled = prefs.getBool(_pushEnabledKey) ?? true;
+    });
+  }
+
+  Color Finalcolor() {
+    return isPushEnabled ? Colors.pink : Colors.red;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +59,7 @@ class _MyWidgetState extends State<Item_page> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        const NotificationPage(color: Colors.red)),
+                        const NotificationPage()),
               );
             },
             child: Image.asset(
@@ -58,13 +78,17 @@ class _MyWidgetState extends State<Item_page> {
         backgroundColor: Colors.transparent, // Set transparent background
         elevation: 0.0, // No shadow
         leading: IconButton(
-          icon: const Icon(Icons.menu),
-          tooltip: 'Menu Icon',
-          onPressed: () {},
+          icon: const Icon(Icons.arrow_back_ios_new_outlined),
+          tooltip: 'back Icon',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MyHomePage()),
+            );
+          },
         ),
       ),
       body: IndexedStack(
-        
         index: _selectedIndex,
         children: [
           _buildImageCarousel(),
@@ -83,12 +107,11 @@ class _MyWidgetState extends State<Item_page> {
     List<String> images = [
       'assets/image1.png', // Asset image path
       'assets/image2.png', // Asset image path
-      'assets/image.png', // Asset image path
+      'assets/image4.png', // Asset image path
       'assets/image3.png', // Asset image path
     ];
     return SingleChildScrollView(
       child: Column(
-        
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Image Carousel
@@ -144,7 +167,7 @@ class _MyWidgetState extends State<Item_page> {
           ),
           const SizedBox(height: 10),
           // About Section
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 10),
             child: Text(
               'About',
@@ -152,7 +175,7 @@ class _MyWidgetState extends State<Item_page> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.red,
+                color: Finalcolor(),
               ),
             ),
           ),
@@ -169,7 +192,7 @@ class _MyWidgetState extends State<Item_page> {
           ),
           const SizedBox(height: 10),
           // Venue Info Section
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 10),
             child: Text(
               'Venue Info',
@@ -177,14 +200,14 @@ class _MyWidgetState extends State<Item_page> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.red,
+                color: Finalcolor(),
               ),
             ),
           ),
           // Add your Venue Info list here
           VenueInfoList(), // <- Add your Venue Info List here
           const SizedBox(height: 10),
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 10),
             child: Text(
               'Location',
@@ -192,7 +215,7 @@ class _MyWidgetState extends State<Item_page> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.red,
+                color: Finalcolor(),
               ),
             ),
           ),
@@ -214,8 +237,8 @@ class _MyWidgetState extends State<Item_page> {
               width: 363,
               child: TextButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 206, 49, 49)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Finalcolor()),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -276,7 +299,9 @@ class VenueInfoList extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(info['icon']),
+                    Icon(
+                      info['icon'],
+                    ),
                     const SizedBox(width: 8.0),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,21 +1,44 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home.dart';
 
-class NotificationPage extends StatelessWidget {
-  final Color color;
+class NotificationPage extends StatefulWidget {
+  const NotificationPage({Key? key}) : super(key: key);
 
-  const NotificationPage({Key? key, required this.color}) : super(key: key);
+  @override
+  State<NotificationPage> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<NotificationPage> {
+  bool isPushEnabled = false;
+  final String _pushEnabledKey = 'push_enabled';
+  @override
+  void initState() {
+    super.initState();
+    _loadSwitchState(); // Load switch state when widget initializes
+  }
+
+  Future<void> _loadSwitchState() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      // Retrieve switch state, default to false if not found
+      isPushEnabled = prefs.getBool(_pushEnabledKey) ?? true;
+    });
+  }
+
+  Color Finalcolor() {
+    return isPushEnabled ? Colors.pink : Colors.red;
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    Color textColor = color == Colors.pink ? Colors.pink : Colors.red;
-    String imagePath = color == Colors.pink
+    Color textColor = Finalcolor() == Colors.pink ? Colors.pink : Colors.red;
+    String imagePath = Finalcolor() == Colors.pink
         ? 'assets/notification_pink.png'
         : 'assets/notification.png';
     return Scaffold(
