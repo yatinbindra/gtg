@@ -4,8 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'account.dart';
 import 'item_page.dart';
 import 'location.dart';
+import 'navDrawer';
 import 'news.dart';
 import 'notification.dart';
+import 'profile.dart';
 import 'search.dart';
 
 void main() {
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
         '/search': (context) => const SearchPage(),
         '/location': (context) => const LocationPage(),
         '/notification': (context) => const NewsPage(),
-        '/account': (context) => const AccountPage(),
+        '/account': (context) => ProfilePage(),
       },
     );
   }
@@ -61,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
     const SearchPage(),
     const LocationPage(),
     const NewsPage(),
-    const AccountPage(),
+    ProfilePage(),
   ];
 
   late bool isSwitched; // Initialize switch state
@@ -162,6 +164,54 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class CategoryCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildCategoryItem(Icons.compass_calibration, "Foodie"),
+                _buildCategoryItem(Icons.compass_calibration, "Explorer"),
+                _buildCategoryItem(Icons.hiking, "Adventurous"),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildCategoryItem(Icons.local_bar, "Chillaxed"),
+                _buildCategoryItem(Icons.event, "Unseen Events"),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCategoryItem(IconData icon, String label) {
+    return Column(
+      children: [
+        Icon(icon, color: Colors.red.shade300),
+        Text(
+          label,
+          style: TextStyle(
+            color: Colors.red.shade300,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -233,6 +283,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildRestaurantCard(Restaurant restaurant) {
     return Card(
+      color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(8.0), // Add padding around the card
         child: Row(
@@ -309,6 +360,7 @@ class _HomePageState extends State<HomePage> {
         ? 'assets/homePage2.png'
         : 'assets/homePage.png';
     return Scaffold(
+      drawer: NavDrawer(),
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -356,11 +408,6 @@ class _HomePageState extends State<HomePage> {
         ],
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          tooltip: 'Menu Icon',
-          onPressed: () {},
-        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -390,48 +437,67 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Column(
                 children: [
-                  const SizedBox(height: 16.0), // Add some space
+                  const SizedBox(height: 20.0), // Add some space
                   Card(
+                    color: Colors.white,
                     margin: EdgeInsets.zero, // Set margin to zero
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
-                          20.0), // Match the image's border radius
+                          32.0), // Match the image's border radius
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(0.0),
                       child: Column(
                         children: [
-                          const SizedBox(height: 16.0),
+                          const SizedBox(height: 15.0),
                           const Text(
                             "Let's Good To Go!",
                             style: TextStyle(
                               fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
-                          const SizedBox(height: 16.0),
+                          const SizedBox(height: 20.0),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Icon(Icons.location_on, color: Finalcolor()),
-                              const SizedBox(width: 8),
-                              const Expanded(
-                                child: Text('Kalkaji, New Delhi ; 3:32 UTC'),
+                              const SizedBox(width: 25),
+                              Icon(
+                                Icons.location_on,
+                                color: Finalcolor(),
+                                size: 30,
                               ),
-                              Icon(Icons.access_time, color: Finalcolor()),
+                              const SizedBox(width: 15),
+                              const Expanded(
+                                child: Text(
+                                  'Kalkaji, New Delhi ; 3:32 UTC',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ),
+                              Icon(
+                                Icons.access_time,
+                                color: Finalcolor(),
+                                size: 30,
+                              ),
+                              const SizedBox(width: 25),
                             ],
                           ),
                           const Divider(
                             height: 20,
                             thickness: 1,
                           ),
+                          const SizedBox(height: 20.0),
                           Container(
                             width: double.infinity,
+                            height: 59,
                             decoration: BoxDecoration(
                               color: Finalcolor(),
                               borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(20),
-                                bottomRight: Radius.circular(20),
+                                bottomLeft: Radius.circular(32),
+                                bottomRight: Radius.circular(32),
                               ),
                             ),
                             child: TextButton(
@@ -449,7 +515,7 @@ class _HomePageState extends State<HomePage> {
                                     'Start',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 18,
+                                      fontSize: 30,
                                     ),
                                   ),
                                   SizedBox(width: 8),
@@ -531,6 +597,10 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: CategoryCard(),
                   ),
                   const SizedBox(height: 20),
                 ],

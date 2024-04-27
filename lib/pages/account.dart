@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'home.dart';
+
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
 
@@ -70,7 +72,12 @@ class _AccountPageState extends State<AccountPage> {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new_outlined),
               tooltip: 'Back Icon',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
+              },
             ),
             title: const Text(
               'Settings',
