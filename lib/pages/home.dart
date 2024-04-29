@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => MyHomePage(),
-        '/search': (context) => const SearchPage(),
+        '/search': (context) =>  SearchPage(),
         '/location': (context) => const LocationPage(),
         '/notification': (context) => const NewsPage(),
         '/account': (context) => ProfilePage(),
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<Widget> _pages = [
     HomePage(),
-    const SearchPage(),
+     SearchPage(),
     const LocationPage(),
     const NewsPage(),
     ProfilePage(),
