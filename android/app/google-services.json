@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "894350029052",
+    "project_id": "good-to-go-6f0f1",
+    "storage_bucket": "good-to-go-6f0f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894350029052:android:ee622ced7bc1d6fd21a779",
+        "android_client_info": {
+          "package_name": "com.example.gtg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOyf_eLWiPjfbGXukEcWTvTpSL4MXa0M8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

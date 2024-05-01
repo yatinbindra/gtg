@@ -1,61 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'home.dart';
-import 'loaction1.dart';
 
-class LocationPage extends StatefulWidget {
-  const LocationPage({Key? key}) : super(key: key);
-
-  @override
-  State<LocationPage> createState() => _LocationPageState();
-}
-
-class _LocationPageState extends State<LocationPage> {
-  late int _pageIndex;
-  late PageController _pageController;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageIndex = 0;
-    _pageController = PageController();
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            _pageIndex = index;
-          });
-        },
-        children: [
-          MyFirstPage(pageController: _pageController),
-          SecondPage(pageController: _pageController),
-        ],
-      ),
-    );
-  }
-}
-
-class MyFirstPage extends StatefulWidget {
+class SecondPage extends StatefulWidget {
   final PageController pageController;
 
-  const MyFirstPage({Key? key, required this.pageController}) : super(key: key);
+  const SecondPage({Key? key, required this.pageController}) : super(key: key);
 
   @override
-  State<MyFirstPage> createState() => _MyFirstPageState();
+  State<SecondPage> createState() => _SecondPageState();
 }
 
-class _MyFirstPageState extends State<MyFirstPage>
+class _SecondPageState extends State<SecondPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Color?> _animation;
@@ -68,9 +24,9 @@ class _MyFirstPageState extends State<MyFirstPage>
       duration: const Duration(seconds: 4),
     );
     _animation = ColorTween(
-      begin: const Color.fromARGB(255, 245, 17, 17),
-      end: const Color.fromARGB(255, 248, 227, 0),
-    ).animate(_controller)
+            begin: const Color.fromARGB(255, 245, 17, 17),
+            end: const Color.fromARGB(255, 248, 227, 0))
+        .animate(_controller)
       ..addListener(() {
         setState(() {});
       });
@@ -87,7 +43,8 @@ class _MyFirstPageState extends State<MyFirstPage>
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return Container(
+    return Hero(
+      tag: "MyCard",
       child: AnimatedBuilder(
         animation: _controller,
         builder: (context, child) {
@@ -115,17 +72,16 @@ class _MyFirstPageState extends State<MyFirstPage>
                       children: [
                         IconButton(
                           icon: const Icon(
-                            Icons.close_rounded,
+                            Icons.arrow_back_ios_new_outlined,
                             color: Colors.white,
                             size: 40,
                           ),
                           tooltip: 'Back Icon',
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MyHomePage(),
-                              ),
+                            widget.pageController.animateToPage(
+                              0,
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.easeInOut,
                             );
                           },
                         ),
@@ -174,47 +130,47 @@ class _MyFirstPageState extends State<MyFirstPage>
                           Container(
                             padding: EdgeInsets.zero, // Ensure no padding
                             child: Image.asset(
-                              'assets/card1.png',
-                              width: 349,
-                              height: 198,
+                              'assets/card2.png',
+                              width: 198,
+                              height: 135,
                             ),
                           ),
                           // Add vertical spacing
                           const Text(
-                            'Mention number of friends',
+                            'Budget per person',
                             style:
                                 TextStyle(fontSize: 25.0, color: Colors.black),
                           ),
-                          const SizedBox(height: 10), // Add vertical spacing
+                          const SizedBox(height: 40), // Add vertical spacing
                           Container(
-                            width: 70,
+                            width: 170,
                             child: const TextField(
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
-                                hintText: '______',
+                                hintText: '\$',
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20), // Add vertical spacing
+                          const SizedBox(height: 50), // Add vertical spacing
                           Center(
                             child: Wrap(
                               spacing: 8.0,
                               runSpacing: 4.0,
                               children: <Widget>[
                                 Chip(
-                                  label: const Text('2'),
+                                  label: const Text('250'),
                                   backgroundColor: Colors.blue[50],
                                 ),
                                 Chip(
-                                  label: const Text('4'),
+                                  label: const Text('500'),
                                   backgroundColor: Colors.blue[50],
                                 ),
                                 Chip(
-                                  label: const Text('6'),
+                                  label: const Text('1000'),
                                   backgroundColor: Colors.blue[50],
                                 ),
                                 Chip(
-                                  label: const Text('8'),
+                                  label: const Text('10000'),
                                   backgroundColor: Colors.blue[50],
                                 ),
                               ],
@@ -268,10 +224,4 @@ class _MyFirstPageState extends State<MyFirstPage>
       ),
     );
   }
-}
-
-void main() {
-  runApp(const MaterialApp(
-    home: LocationPage(),
-  ));
 }

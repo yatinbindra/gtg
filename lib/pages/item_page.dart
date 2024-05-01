@@ -31,7 +31,7 @@ class _MyWidgetState extends State<Item_page> {
   }
 
   Color Finalcolor() {
-    return isPushEnabled ? Colors.pink : Colors.red;
+    return isPushEnabled ? Color.fromARGB(255, 240, 0, 76) : Color.fromARGB(255, 206, 49, 49);
   }
 
   @override

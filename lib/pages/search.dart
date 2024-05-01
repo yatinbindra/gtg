@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
 import 'home.dart';
 import 'item_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -76,14 +79,16 @@ class _MyWidgetState extends State<SearchPage> {
   }
 
   Color Finalcolor() {
-    return isPushEnabled ? Colors.pink : Colors.red;
+    return isPushEnabled
+        ? Color.fromARGB(255, 240, 0, 76)
+        : Color.fromARGB(255, 206, 49, 49);
   }
 
   Widget buildRestaurantCard(Restaurant restaurant) {
     return Card(
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(8.0), // Add padding around the card
+        padding: const EdgeInsets.all(15.0), // Add padding around the card
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start, // Align text to the top
@@ -141,8 +146,8 @@ class _MyWidgetState extends State<SearchPage> {
                 ),
                 // Pushes the price to the right edge
                 Text('Avg. ${restaurant.price} /Person',
-                    style: TextStyle(
-                        color: Finalcolor())), // Positioned at the right side
+                    style: TextStyle(color: Finalcolor())),
+                // Positioned at the right side
               ],
             ),
           ],
@@ -178,102 +183,128 @@ class _MyWidgetState extends State<SearchPage> {
                       bottomRight: Radius.circular(40.0),
                     ),
                   ),
+                  child: Image.asset(
+                    'assets/searchbg.png',
+                    width: double.infinity,
+                  ),
+                ),
+                Positioned(
+                  top: 0,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const SizedBox(height: 40.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.arrow_back_ios_new_outlined),
-                            tooltip: 'Back Icon',
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MyHomePage(),
-                                ),
-                              );
-                            },
-                          ),
-                          SizedBox(
-                            width: width * .31,
-                          ),
-                          const Text(
-                            'Search',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
+                      Container(
+                        width: width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(width: 5),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.arrow_back_ios_new_outlined,
+                              ),
+                              tooltip: 'Back Icon',
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MyHomePage(),
+                                  ),
+                                );
+                              },
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: width * .31,
+                            ),
+                            const Text(
+                              'Search',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 20.0),
-                      Center(
-                        child: SizedBox(
-                          width: 308,
-                          height: 48,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Search',
-                                filled: true,
-                                fillColor: Colors.white,
-                                prefixIcon: const Icon(Icons.search),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                  borderSide: BorderSide.none,
-                                ),
+                      Container(
+                        width: width,
+                        height: 48,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Search',
+                              filled: true,
+                              fillColor: Colors.white,
+                              prefixIcon: const Icon(Icons.search),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                                borderSide: BorderSide.none,
                               ),
                             ),
                           ),
                         ),
                       ),
                       const SizedBox(height: 20.0),
-                      Center(
+                      Container(
                         child: Wrap(
                           spacing: 8.0,
                           runSpacing: 4.0,
+                          crossAxisAlignment: WrapCrossAlignment.center,
                           children: <Widget>[
                             Chip(
-                              label: const Text('Jail Road'),
-                              backgroundColor: Colors.pink[50],
+                              label: const Text(
+                                'Jail Road',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              backgroundColor: Finalcolor(),
                             ),
                             Chip(
-                              label: const Text('Hauz Khas'),
-                              backgroundColor: Colors.pink[50],
+                              label: const Text(
+                                'Hauz Khas',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              backgroundColor: Finalcolor(),
                             ),
                             Chip(
-                              label: const Text('PVR'),
-                              backgroundColor: Colors.pink[50],
+                              label: const Text(
+                                'PVR',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              backgroundColor: Finalcolor(),
                             ),
                           ],
                         ),
-                      ),
+                      )
                     ],
-                  ),
-                ),
-                Positioned(
-                  top: 0,
-                  child: Image.asset(
-                    'assets/searchbg.png',
-                    width: width,
                   ),
                 ),
               ],
             ),
           ),
           const SizedBox(height: 20.0),
-          const Text(
-            'Search Result',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
+          Padding(
+            padding: EdgeInsets.only(left: 10.0),
+            child: Text(
+              'Search Results',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              ),
             ),
           ),
+
           // Restaurant part (scrollable)
           Expanded(
             child: ListView.builder(
@@ -293,6 +324,7 @@ class _MyWidgetState extends State<SearchPage> {
               },
             ),
           ),
+          const SizedBox(height: 20),
         ],
       ),
     );

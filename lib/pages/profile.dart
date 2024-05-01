@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home.dart';
 
 void main() => runApp(ProfilePage1());
@@ -39,6 +39,26 @@ class _ProfilePageState extends State<ProfilePage> {
     ),
   ];
 
+  bool isPushEnabled = false;
+  final String _pushEnabledKey = 'push_enabled';
+  @override
+  void initState() {
+    super.initState();
+    _loadSwitchState(); // Load switch state when widget initializes
+  }
+
+  Future<void> _loadSwitchState() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      // Retrieve switch state, default to false if not found
+      isPushEnabled = prefs.getBool(_pushEnabledKey) ?? true;
+    });
+  }
+
+  Color Finalcolor() {
+    return isPushEnabled ? Color.fromARGB(255, 240, 0, 76) : Color.fromARGB(255, 206, 49, 49);
+  }
+
   Widget buildProfile(Profile profile) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               CircleAvatar(
                 radius: 40,
-                backgroundColor: Colors.red.withOpacity(0.2),
+                backgroundColor: Finalcolor().withOpacity(0.2),
               ),
               Positioned.fill(
                 child: Align(
@@ -57,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Icon(
                     Icons.account_circle,
                     size: 80, // Adjust the size of the icon as needed
-                    color: Colors.red.withOpacity(
+                    color: Finalcolor().withOpacity(
                         0.9), // Adjust the color and opacity of the icon
                   ),
                 ),
@@ -75,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
           height: 48,
           width: double.infinity, // to make it full width
           decoration: BoxDecoration(
-            color: Colors.red.withOpacity(0.3),
+            color: Finalcolor().withOpacity(0.2),
             borderRadius:
                 BorderRadius.circular(10), // Adjust the radius as needed
           ),
@@ -97,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
           height: 48,
           width: double.infinity, // to make it full width
           decoration: BoxDecoration(
-            color: Colors.red.withOpacity(0.3),
+            color: Finalcolor().withOpacity(0.2),
             borderRadius:
                 BorderRadius.circular(10), // Adjust the radius as needed
           ),
@@ -119,7 +139,7 @@ class _ProfilePageState extends State<ProfilePage> {
           height: 48,
           width: double.infinity, // to make it full width
           decoration: BoxDecoration(
-            color: Colors.red.withOpacity(0.3),
+            color: Finalcolor().withOpacity(0.2),
             borderRadius:
                 BorderRadius.circular(10), // Adjust the radius as needed
           ),
@@ -137,8 +157,7 @@ class _ProfilePageState extends State<ProfilePage> {
           width: double.infinity,
           child: ElevatedButton(
             style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color.fromARGB(255, 206, 49, 49)),
+                backgroundColor: MaterialStateProperty.all<Color>(Finalcolor()),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
@@ -170,10 +189,10 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(5.0),
                   side: const BorderSide(
                     color: Colors.black, // Specify the border color here
-                    width: 2, // Specify the border width here
+                    width: 1, // Specify the border width here
                   ),
                 ),
               ),
@@ -181,10 +200,10 @@ class _ProfilePageState extends State<ProfilePage> {
             onPressed: () {
               // Implement delete account logic here
             },
-            child: const Text('Delete Account',
+            child: Text('Delete Account',
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: Colors.black,
+                  color: Finalcolor(),
                 )),
           ),
         ),

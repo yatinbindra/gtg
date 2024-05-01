@@ -4,7 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'account.dart';
 import 'item_page.dart';
 import 'location.dart';
-import 'navDrawer';
+
+import 'navDrawer.dart';
 import 'news.dart';
 import 'notification.dart';
 import 'profile.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => MyHomePage(),
-        '/search': (context) =>  SearchPage(),
+        '/search': (context) => SearchPage(),
         '/location': (context) => const LocationPage(),
         '/notification': (context) => const NewsPage(),
         '/account': (context) => ProfilePage(),
@@ -60,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<Widget> _pages = [
     HomePage(),
-     SearchPage(),
+    SearchPage(),
     const LocationPage(),
     const NewsPage(),
     ProfilePage(),
@@ -85,7 +86,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Color Finalcolor() {
-    return isPushEnabled ? Colors.pink : Colors.red;
+    return isPushEnabled
+        ? Color.fromARGB(255, 240, 0, 76)
+        : Color.fromARGB(255, 206, 49, 49);
   }
 
   @override
@@ -232,7 +235,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Color Finalcolor() {
-    return isPushEnabled ? Colors.pink : Colors.red;
+    return isPushEnabled
+        ? Color.fromARGB(255, 240, 0, 76)
+        : Color.fromARGB(255, 206, 49, 49);
   }
 
   void navigateToNotificationPage(BuildContext context) {
@@ -285,7 +290,7 @@ class _HomePageState extends State<HomePage> {
     return Card(
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(8.0), // Add padding around the card
+        padding: const EdgeInsets.all(10.0), // Add padding around the card
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start, // Align text to the top
@@ -356,7 +361,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     double width = MediaQuery.of(context).size.width;
-    String imagePath = Finalcolor() == Colors.pink
+    String imagePath = Finalcolor() == Color.fromARGB(255, 240, 0, 76)
         ? 'assets/homePage2.png'
         : 'assets/homePage.png';
     return Scaffold(

@@ -29,7 +29,7 @@ class _MyWidgetState extends State<NotificationPage> {
   }
 
   Color Finalcolor() {
-    return isPushEnabled ? Colors.pink : Colors.red;
+    return isPushEnabled ? Color.fromARGB(255, 240, 0, 76) : Color.fromARGB(255, 206, 49, 49);
   }
 
   @override
@@ -37,8 +37,7 @@ class _MyWidgetState extends State<NotificationPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    Color textColor = Finalcolor() == Colors.pink ? Colors.pink : Colors.red;
-    String imagePath = Finalcolor() == Colors.pink
+    String imagePath = Finalcolor() == Color.fromARGB(255, 240, 0, 76)
         ? 'assets/notification_pink.png'
         : 'assets/notification.png';
     return Scaffold(
@@ -97,7 +96,7 @@ class _MyWidgetState extends State<NotificationPage> {
                 'Notification is empty',
                 style: TextStyle(
                   fontSize: 25.0,
-                  color: textColor, // Apply color to the text
+                  color: Finalcolor(), // Apply color to the text
                 ),
               ),
             ],
