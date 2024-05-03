@@ -1,21 +1,69 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'home.dart';
 
-class SecondPage extends StatefulWidget {
+class FivthPage extends StatefulWidget {
   final PageController pageController;
 
-  const SecondPage({Key? key, required this.pageController}) : super(key: key);
+  const FivthPage({Key? key, required this.pageController}) : super(key: key);
 
   @override
-  State<SecondPage> createState() => _SecondPageState();
+  State<FivthPage> createState() => _FivthPageState();
 }
 
-class _SecondPageState extends State<SecondPage>
+class RectangleSliderThumbShape extends SliderComponentShape {
+  final double thumbWidth;
+  final double thumbHeight;
+
+  const RectangleSliderThumbShape({
+    required this.thumbWidth,
+    required this.thumbHeight,
+  });
+
+  @override
+  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
+    return Size(thumbWidth, thumbHeight);
+  }
+
+  @override
+  void paint(
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    bool isDiscrete = false,
+    TextPainter? labelPainter,
+    RenderBox? parentBox,
+    SliderThemeData? sliderTheme,
+    TextDirection? textDirection,
+    double? value,
+    double? textScaleFactor,
+    Size? sizeWithOverflow,
+  }) {
+    final Canvas canvas = context.canvas;
+
+    final rect = Rect.fromCenter(
+      center: center,
+      width: thumbWidth,
+      height: thumbHeight,
+    );
+
+    final Paint paint = Paint()
+      ..color = sliderTheme?.thumbColor ?? Colors.grey
+      ..style = PaintingStyle.fill;
+
+    canvas.drawRRect(
+        RRect.fromRectAndRadius(rect, Radius.circular(8.0)), paint);
+  }
+}
+
+class _FivthPageState extends State<FivthPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Color?> _animation;
-
+  double _value = 3.0;
   @override
   void initState() {
     super.initState();
@@ -43,6 +91,7 @@ class _SecondPageState extends State<SecondPage>
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
     return Hero(
       tag: "MyCard",
       child: AnimatedBuilder(
@@ -79,7 +128,7 @@ class _SecondPageState extends State<SecondPage>
                           tooltip: 'Back Icon',
                           onPressed: () {
                             widget.pageController.animateToPage(
-                              0,
+                              3,
                               duration: Duration(milliseconds: 500),
                               curve: Curves.easeInOut,
                             );
@@ -122,61 +171,70 @@ class _SecondPageState extends State<SecondPage>
                           Container(
                             padding: EdgeInsets.zero, // Ensure no padding
                             child: Image.asset(
-                              'assets/gtg1.png',
-                              width: 85,
-                              height: 85,
+                              'assets/way.jpg',
+                              width: 328,
+                              height: 215,
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.zero, // Ensure no padding
-                            child: Image.asset(
-                              'assets/card2.png',
-                              width: 198,
-                              height: 135,
-                            ),
-                          ),
-                          // Add vertical spacing
+                          const SizedBox(height: 41),
                           const Text(
-                            'Budget per person',
+                            'Select range in kilometeres',
                             style:
                                 TextStyle(fontSize: 25.0, color: Colors.black),
                           ),
-                          const SizedBox(height: 30), // Add vertical spacing
-                          Container(
-                            width: 170,
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: '\$',
+
+                          const SizedBox(height: 40),
+
+                          // Add vertical spacing
+                          Column(
+                            children: [
+                              SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  trackHeight: 25.0,
+                                  trackShape: RoundedRectSliderTrackShape(),
+                                  activeTrackColor: Colors.red.shade800,
+                                  inactiveTrackColor:
+                                      Colors.red.withOpacity(0.2),
+                                  thumbShape: RectangleSliderThumbShape(
+                                      thumbWidth: 28.0, thumbHeight: 40.0),
+                                  thumbColor: Color.fromARGB(255, 239, 16, 0),
+                                  tickMarkShape: RoundSliderTickMarkShape(),
+                                  activeTickMarkColor: Colors.red.shade800,
+                                  inactiveTickMarkColor:
+                                      Colors.red.withOpacity(0.0),
+                                  valueIndicatorShape:
+                                      PaddleSliderValueIndicatorShape(),
+                                  valueIndicatorColor:
+                                      Colors.red.withOpacity(0.2),
+                                  valueIndicatorTextStyle: TextStyle(
+                                    color: Colors.red.shade800,
+                                    fontSize: 25.0,
+                                  ),
+                                ),
+                                child: Slider(
+                                  min: 0.0,
+                                  max: 6.0,
+                                  value: _value,
+                                  divisions: 6,
+                                  label: '${_value.round()}',
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _value = value;
+                                    });
+                                  },
+                                ),
                               ),
-                            ),
+                              const SizedBox(height: 10),
+                              Text(
+                                '$_value km',
+                                style: TextStyle(
+                                    fontSize: 25.0, color: Colors.black),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 40), // Add vertical spacing
-                          Center(
-                            child: Wrap(
-                              spacing: 8.0,
-                              runSpacing: 4.0,
-                              children: <Widget>[
-                                Chip(
-                                  label: const Text('250'),
-                                  backgroundColor: Colors.blue[50],
-                                ),
-                                Chip(
-                                  label: const Text('500'),
-                                  backgroundColor: Colors.blue[50],
-                                ),
-                                Chip(
-                                  label: const Text('1000'),
-                                  backgroundColor: Colors.blue[50],
-                                ),
-                                Chip(
-                                  label: const Text('10000'),
-                                  backgroundColor: Colors.blue[50],
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 27), // Add vertical spacing
+
+                          const SizedBox(height: 39), // Add vertical spacing
+                          // Add vertical spacing
                           Container(
                             width: double.infinity,
                             height: 65,
@@ -190,7 +248,7 @@ class _SecondPageState extends State<SecondPage>
                             child: TextButton(
                               onPressed: () {
                                 widget.pageController.animateToPage(
-                                  2,
+                                  5,
                                   duration: const Duration(milliseconds: 500),
                                   curve: Curves.easeInOut,
                                 );
@@ -199,7 +257,7 @@ class _SecondPageState extends State<SecondPage>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    'Continue',
+                                    'Find',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 30,

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'home.dart';
 
-class SecondPage extends StatefulWidget {
+class FourthPage extends StatefulWidget {
   final PageController pageController;
 
-  const SecondPage({Key? key, required this.pageController}) : super(key: key);
+  const FourthPage({Key? key, required this.pageController}) : super(key: key);
 
   @override
-  State<SecondPage> createState() => _SecondPageState();
+  State<FourthPage> createState() => _FourthPageState();
 }
 
-class _SecondPageState extends State<SecondPage>
+class _FourthPageState extends State<FourthPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Color?> _animation;
@@ -79,7 +79,7 @@ class _SecondPageState extends State<SecondPage>
                           tooltip: 'Back Icon',
                           onPressed: () {
                             widget.pageController.animateToPage(
-                              0,
+                              2,
                               duration: Duration(milliseconds: 500),
                               curve: Curves.easeInOut,
                             );
@@ -130,53 +130,58 @@ class _SecondPageState extends State<SecondPage>
                           Container(
                             padding: EdgeInsets.zero, // Ensure no padding
                             child: Image.asset(
-                              'assets/card2.png',
-                              width: 198,
-                              height: 135,
+                              'assets/watch.jpg',
+                              width: 157,
+                              height: 137,
                             ),
                           ),
                           // Add vertical spacing
                           const Text(
-                            'Budget per person',
+                            'Mention number of hours',
                             style:
                                 TextStyle(fontSize: 25.0, color: Colors.black),
                           ),
-                          const SizedBox(height: 30), // Add vertical spacing
+                          const Text(
+                            'to spend',
+                            style:
+                                TextStyle(fontSize: 25.0, color: Colors.black),
+                          ),
+                          const SizedBox(height: 10), // Add vertical spacing
                           Container(
-                            width: 170,
+                            width: 70,
                             child: const TextField(
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
-                                hintText: '\$',
+                                hintText: '______',
                               ),
                             ),
                           ),
-                          const SizedBox(height: 40), // Add vertical spacing
+                          const SizedBox(height: 25), // Add vertical spacing
                           Center(
                             child: Wrap(
                               spacing: 8.0,
                               runSpacing: 4.0,
                               children: <Widget>[
                                 Chip(
-                                  label: const Text('250'),
+                                  label: const Text('2'),
                                   backgroundColor: Colors.blue[50],
                                 ),
                                 Chip(
-                                  label: const Text('500'),
+                                  label: const Text('4'),
                                   backgroundColor: Colors.blue[50],
                                 ),
                                 Chip(
-                                  label: const Text('1000'),
+                                  label: const Text('6'),
                                   backgroundColor: Colors.blue[50],
                                 ),
                                 Chip(
-                                  label: const Text('10000'),
+                                  label: const Text('8'),
                                   backgroundColor: Colors.blue[50],
                                 ),
                               ],
                             ),
                           ),
-                          const SizedBox(height: 27), // Add vertical spacing
+                          const SizedBox(height: 24), // Add vertical spacing
                           Container(
                             width: double.infinity,
                             height: 65,
@@ -190,7 +195,7 @@ class _SecondPageState extends State<SecondPage>
                             child: TextButton(
                               onPressed: () {
                                 widget.pageController.animateToPage(
-                                  2,
+                                  4,
                                   duration: const Duration(milliseconds: 500),
                                   curve: Curves.easeInOut,
                                 );

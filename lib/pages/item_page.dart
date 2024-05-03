@@ -31,7 +31,9 @@ class _MyWidgetState extends State<Item_page> {
   }
 
   Color Finalcolor() {
-    return isPushEnabled ? Color.fromARGB(255, 240, 0, 76) : Color.fromARGB(255, 206, 49, 49);
+    return isPushEnabled
+        ? Color.fromARGB(255, 240, 0, 76)
+        : Color.fromARGB(255, 206, 49, 49);
   }
 
   @override
@@ -58,8 +60,7 @@ class _MyWidgetState extends State<Item_page> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        const NotificationPage()),
+                    builder: (context) => const NotificationPage()),
               );
             },
             child: Image.asset(
@@ -131,10 +132,13 @@ class _MyWidgetState extends State<Item_page> {
               },
             ),
           ),
-          const Text(
-            'Radisson Blu Kaushambi',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Text(
+              'Radisson Blu Kaushambi',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
           ),
           const SizedBox(height: 10),
           // Star Rating
@@ -180,7 +184,7 @@ class _MyWidgetState extends State<Item_page> {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.only(left: 10),
+            padding: EdgeInsets.only(left: 10, right: 10),
             child: Text(
               'Designed with the view of providing you an opulent experience, the Radisson Blu Kaushambi is located in close proximity to New- Delhi railway station connected via metro. After being blessed by the holy Akshardham temple, relax in one of the comfortable well-designed rooms and suits built in high style and practical touch along with amazing wifi, coffee and tea facilities. To satisfy your vegetarian hunger, the restaurant provides various dishes to international and Indian favourites, making them a perfect pick for wedding functions like sangeet, cocktail, mehendi or sangeet.',
               textAlign: TextAlign.start,
@@ -259,6 +263,7 @@ class _MyWidgetState extends State<Item_page> {
               ),
             ),
           ),
+          const SizedBox(height: 20),
         ],
       ),
     );

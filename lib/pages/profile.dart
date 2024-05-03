@@ -56,7 +56,9 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Color Finalcolor() {
-    return isPushEnabled ? Color.fromARGB(255, 240, 0, 76) : Color.fromARGB(255, 206, 49, 49);
+    return isPushEnabled
+        ? Color.fromARGB(255, 240, 0, 76)
+        : Color.fromARGB(255, 206, 49, 49);
   }
 
   Widget buildProfile(Profile profile) {

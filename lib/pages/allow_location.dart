@@ -1,6 +1,8 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:gtg/pages/loadingPage.dart';
+import 'package:gtg/pages/location.dart';
 
 import 'home.dart';
 
@@ -40,7 +42,7 @@ class AllowLocation extends StatelessWidget {
                     height: height * 0.15,
                   ),
                   Image.asset(
-                    'assets/location.png',
+                    'assets/location.gif',
                     width: 180,
                     height: 180,
                   ),
@@ -90,7 +92,8 @@ class AllowLocation extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                          MaterialPageRoute(
+                              builder: (context) => LoadingPage()),
                         );
                       },
                       child: const Text('Allow',
@@ -107,7 +110,7 @@ class AllowLocation extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MyHomePage()),
+                        MaterialPageRoute(builder: (context) => LoadingPage()),
                       );
                     },
                     child: const Padding(

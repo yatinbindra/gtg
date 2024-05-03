@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'home.dart';
 
-class SecondPage extends StatefulWidget {
+class ThirdPage extends StatefulWidget {
   final PageController pageController;
 
-  const SecondPage({Key? key, required this.pageController}) : super(key: key);
+  const ThirdPage({Key? key, required this.pageController}) : super(key: key);
 
   @override
-  State<SecondPage> createState() => _SecondPageState();
+  State<ThirdPage> createState() => _ThirdPageState();
 }
 
-class _SecondPageState extends State<SecondPage>
+class _ThirdPageState extends State<ThirdPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Color?> _animation;
@@ -79,7 +79,7 @@ class _SecondPageState extends State<SecondPage>
                           tooltip: 'Back Icon',
                           onPressed: () {
                             widget.pageController.animateToPage(
-                              0,
+                              1,
                               duration: Duration(milliseconds: 500),
                               curve: Curves.easeInOut,
                             );
@@ -127,56 +127,17 @@ class _SecondPageState extends State<SecondPage>
                               height: 85,
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.zero, // Ensure no padding
-                            child: Image.asset(
-                              'assets/card2.png',
-                              width: 198,
-                              height: 135,
-                            ),
-                          ),
-                          // Add vertical spacing
                           const Text(
-                            'Budget per person',
+                            'Select mode',
                             style:
                                 TextStyle(fontSize: 25.0, color: Colors.black),
                           ),
-                          const SizedBox(height: 30), // Add vertical spacing
-                          Container(
-                            width: 170,
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: '\$',
-                              ),
-                            ),
+                          SizedBox(
+                            height: 15,
                           ),
-                          const SizedBox(height: 40), // Add vertical spacing
                           Center(
-                            child: Wrap(
-                              spacing: 8.0,
-                              runSpacing: 4.0,
-                              children: <Widget>[
-                                Chip(
-                                  label: const Text('250'),
-                                  backgroundColor: Colors.blue[50],
-                                ),
-                                Chip(
-                                  label: const Text('500'),
-                                  backgroundColor: Colors.blue[50],
-                                ),
-                                Chip(
-                                  label: const Text('1000'),
-                                  backgroundColor: Colors.blue[50],
-                                ),
-                                Chip(
-                                  label: const Text('10000'),
-                                  backgroundColor: Colors.blue[50],
-                                ),
-                              ],
-                            ),
+                            child: CategoryCard(),
                           ),
-                          const SizedBox(height: 27), // Add vertical spacing
                           Container(
                             width: double.infinity,
                             height: 65,
@@ -190,7 +151,7 @@ class _SecondPageState extends State<SecondPage>
                             child: TextButton(
                               onPressed: () {
                                 widget.pageController.animateToPage(
-                                  2,
+                                  3,
                                   duration: const Duration(milliseconds: 500),
                                   curve: Curves.easeInOut,
                                 );
@@ -222,6 +183,80 @@ class _SecondPageState extends State<SecondPage>
           );
         },
       ),
+    );
+  }
+}
+
+class CategoryCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _buildCategoryItem(
+              AssetImage(
+                'assets/pizza.png',
+              ),
+              "Foodie",
+              '"Foodie Frenzy: Tasting Our Way Through Town"'),
+          SizedBox(
+            height: 10,
+          ),
+          _buildCategoryItem(AssetImage('assets/explorer.png'), "Explorer",
+              "“Monumental Moments: Exploring Our Roots”"),
+          SizedBox(
+            height: 10,
+          ),
+          _buildCategoryItem(AssetImage('assets/adventurous.png'),
+              "Adventurous", '"Chill Squad Hangs: Casual Vibes Only"'),
+          SizedBox(
+            height: 10,
+          ),
+          _buildCategoryItem(AssetImage('assets/wine.png'), "Chillaxed",
+              '"Thrills & Chills: Adventure Awaits!"'),
+          SizedBox(
+            height: 10,
+          ),
+          _buildCategoryItem(AssetImage('assets/event.png'), "Unseen Events",
+              '"FOMO-Free Zone: Exclusive Experiences Only"'),
+          SizedBox(
+            height: 24,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCategoryItem(AssetImage image, String label, String label2) {
+    return Row(
+      children: [
+        Container(
+          width: 51, // Set the width of the image
+          height: 51, // Set the height of the image
+          child: Image(
+            image: image, // Use the provided image
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              style: TextStyle(
+                  color: Color.fromARGB(255, 206, 49, 49), fontSize: 16),
+            ),
+            Text(
+              label2,
+              style: TextStyle(color: Colors.black, fontSize: 12),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

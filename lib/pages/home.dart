@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => MyHomePage(),
-        '/search': (context) => SearchPage(),
+        '/search': (context) => const SearchPage(),
         '/location': (context) => const LocationPage(),
         '/notification': (context) => const NewsPage(),
         '/account': (context) => ProfilePage(),
@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<Widget> _pages = [
     HomePage(),
-    SearchPage(),
+    const SearchPage(),
     const LocationPage(),
     const NewsPage(),
     ProfilePage(),
@@ -87,8 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Color Finalcolor() {
     return isPushEnabled
-        ? Color.fromARGB(255, 240, 0, 76)
-        : Color.fromARGB(255, 206, 49, 49);
+        ? const Color.fromARGB(255, 240, 0, 76)
+        : const Color.fromARGB(255, 206, 49, 49);
   }
 
   @override
@@ -182,16 +182,25 @@ class CategoryCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildCategoryItem(Icons.compass_calibration, "Foodie"),
-                _buildCategoryItem(Icons.compass_calibration, "Explorer"),
-                _buildCategoryItem(Icons.hiking, "Adventurous"),
+                _buildCategoryItem(
+                    AssetImage(
+                      'assets/pizza.png',
+                    ),
+                    "Foodie"),
+                _buildCategoryItem(
+                    AssetImage('assets/explorer.png'), "Explorer"),
+                _buildCategoryItem(
+                    AssetImage('assets/adventurous.png'), "Adventurous"),
               ],
             ),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildCategoryItem(Icons.local_bar, "Chillaxed"),
-                _buildCategoryItem(Icons.event, "Unseen Events"),
+                _buildCategoryItem(AssetImage('assets/wine.png'), "Chillaxed"),
+                _buildCategoryItem(
+                    AssetImage('assets/event.png'), "Unseen Events"),
+                _buildCategoryItem(AssetImage('assets/event1.png'), ""),
               ],
             ),
           ],
@@ -200,14 +209,20 @@ class CategoryCard extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryItem(IconData icon, String label) {
+  Widget _buildCategoryItem(AssetImage image, String label) {
     return Column(
       children: [
-        Icon(icon, color: Colors.red.shade300),
+        Container(
+          width: 60, // Set the width of the image
+          height: 60, // Set the height of the image
+          child: Image(
+            image: image, // Use the provided image
+          ),
+        ),
         Text(
           label,
           style: TextStyle(
-            color: Colors.red.shade300,
+            color: Color.fromARGB(255, 206, 49, 49),
           ),
         ),
       ],
@@ -236,15 +251,15 @@ class _HomePageState extends State<HomePage> {
 
   Color Finalcolor() {
     return isPushEnabled
-        ? Color.fromARGB(255, 240, 0, 76)
-        : Color.fromARGB(255, 206, 49, 49);
+        ? const Color.fromARGB(255, 240, 0, 76)
+        : const Color.fromARGB(255, 206, 49, 49);
   }
 
   void navigateToNotificationPage(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => NotificationPage(),
+        builder: (context) => const NotificationPage(),
       ),
     );
   }
@@ -361,11 +376,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     double width = MediaQuery.of(context).size.width;
-    String imagePath = Finalcolor() == Color.fromARGB(255, 240, 0, 76)
+    String imagePath = Finalcolor() == const Color.fromARGB(255, 240, 0, 76)
         ? 'assets/homePage2.png'
         : 'assets/homePage.png';
     return Scaffold(
-      drawer: NavDrawer(),
+      drawer: const NavDrawer(),
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -405,10 +420,13 @@ class _HomePageState extends State<HomePage> {
                 _saveSwitchState(); // Save switch state when changed
               });
             },
-            activeTrackColor: Color.fromARGB(241, 255, 113, 158),
+
+            activeTrackColor: const Color.fromARGB(241, 255, 113, 158),
             activeColor: Colors.pink,
             inactiveThumbColor: Colors.red,
-            inactiveTrackColor: Color.fromARGB(224, 255, 206, 81),
+            inactiveTrackColor: const Color.fromARGB(224, 255, 206, 81),
+            activeThumbImage: const AssetImage('assets/couple.png'),
+            inactiveThumbImage: const AssetImage('assets/friend1.png'),
           ),
         ],
         backgroundColor: Colors.transparent,

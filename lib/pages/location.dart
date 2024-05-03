@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gtg/pages/location2.dart';
 
 import 'home.dart';
 import 'loaction1.dart';
+import 'location3.dart';
+import 'location4.dart';
+import 'locationPreLoad.dart';
+import 'route.dart';
 
 class LocationPage extends StatefulWidget {
   const LocationPage({Key? key}) : super(key: key);
@@ -40,6 +45,12 @@ class _LocationPageState extends State<LocationPage> {
         children: [
           MyFirstPage(pageController: _pageController),
           SecondPage(pageController: _pageController),
+          ThirdPage(pageController: _pageController),
+          FourthPage(pageController: _pageController),
+          FivthPage(pageController: _pageController),
+          PreLoadPage(pageController: _pageController),
+          RoutePage(pageController: _pageController),
+          
         ],
       ),
     );
@@ -195,7 +206,7 @@ class _MyFirstPageState extends State<MyFirstPage>
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20), // Add vertical spacing
+                          const SizedBox(height: 10), // Add vertical spacing
                           Center(
                             child: Wrap(
                               spacing: 8.0,
@@ -220,7 +231,7 @@ class _MyFirstPageState extends State<MyFirstPage>
                               ],
                             ),
                           ),
-                          const SizedBox(height: 25), // Add vertical spacing
+                          const SizedBox(height: 14), // Add vertical spacing
                           Container(
                             width: double.infinity,
                             height: 65,

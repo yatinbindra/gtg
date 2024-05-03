@@ -202,7 +202,7 @@ class _MyWidgetState extends State<NavDrawer> {
                       },
                     ),
                     SizedBox(
-                      height: height * 0.3,
+                      height: height * 0.2,
                     ),
                     Center(
                       child: TextButton(
