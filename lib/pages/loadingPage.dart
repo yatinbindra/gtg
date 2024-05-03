@@ -15,7 +15,7 @@ class _MyWidgetState extends State<LoadingPage> {
   void initState() {
     Timer(Duration(seconds: 1), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
+          context, MaterialPageRoute(builder: (context) => MyHomePage()));
     });
     super.initState();
   }
